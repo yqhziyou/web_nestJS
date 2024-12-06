@@ -1,0 +1,62 @@
+/* ChatWindow.css */
+
+.chat-window {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Adjust based on your design */
+    box-sizing: border-box;
+}
+
+.chat-window .message-list {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 10px; /* Avoid text clipping */
+}
+
+.chat-window .message-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-window .message-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.chat-window .message-list::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.chat-window .message-item {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.chat-window .message-item.user {
+    justify-content: flex-end;
+}
+
+.chat-window .message-content {
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+    word-wrap: break-word;
+}
+
+.chat-window .message-content.user {
+    background-color: #e6f7ff;
+}
+
+.chat-window .input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-window .input-container textarea {
+    flex: 1;
+}

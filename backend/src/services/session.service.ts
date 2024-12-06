@@ -44,7 +44,7 @@ export class SessionService {
     }
 
 
-    async getChatResponse(sessionToken: string, content: string): Promise<string> {
+    async getChatResponse(sessionToken: string, content: string): Promise<MessageDTO> {
        
         const session = await this.sessionRepository.findOne({
             where: { sessionToken },
@@ -97,7 +97,7 @@ export class SessionService {
             { totalTokenUsage: updatedTokenUsage },
         );
 
-        return messageDTO.content;
+        return messageDTO;
     }
 
     async getMessages(sessionToken: string): Promise<MessageDTO[]> {

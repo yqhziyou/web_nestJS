@@ -5,6 +5,7 @@ import { Message } from '../entities/message';
 import { MessageDTO } from '../dto/message.dto';
 import { plainToInstance } from 'class-transformer';
 import OpenAI from "openai";
+import {GitRunner} from "@nestjs/cli/lib/runners/git.runner";
 
 @Injectable()
 export class OpenAIChatAssistant {
@@ -37,7 +38,6 @@ export class OpenAIChatAssistant {
                 tokenUsage: tokenUsage,
                 createdAt: new Date(),
             });
-            
             const messageEntity = this.messageRepository.create(messageDTO);
             await this.messageRepository.save(messageEntity);
 

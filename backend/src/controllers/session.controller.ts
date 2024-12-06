@@ -22,7 +22,7 @@ export class SessionController {
     }
     
     @Post(':sessionToken/messages')
-    async getChatResponse(@Param('sessionToken') sessionToken: string, @Body('content') content: string): Promise<string> {
+    async getChatResponse(@Param('sessionToken') sessionToken: string, @Body('content') content: string): Promise<MessageDTO> {
         return this.sessionService.getChatResponse(sessionToken, content);
     }
 

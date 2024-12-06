@@ -1,0 +1,15 @@
+.home-container {
+    display: flex;
+    height: 100vh; /* 设置全屏高度 */
+}
+
+.home-container > div:first-child {
+    flex: 0 0 20%; /* 固定宽度为20% */
+    border-right: 1px solid #ccc; /* 添加分隔线，可选 */
+    overflow-y: auto; /* 如果内容过多，允许滚动 */
+}
+
+.home-container > div:last-child {
+    flex: 1; /* 占据剩余80%的宽度 */
+    overflow-y: auto; /* 如果内容过多，允许滚动 */
+}
