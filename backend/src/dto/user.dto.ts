@@ -31,13 +31,11 @@ export class CreateUserDTO {
     @IsString()
     username: string;
 
-    
+    @IsOptional()
     @IsEmail()
     email: string;
 
     @IsNotEmpty()
     @IsString()
-    @MinLength(6) 
-    @MaxLength(20)
     password: string;
 }

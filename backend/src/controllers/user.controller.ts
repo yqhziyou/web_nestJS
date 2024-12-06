@@ -39,6 +39,18 @@ export class UserController {
         }
     }
 
+    @Post('login')
+    async login(@Body() createUserDTO: CreateUserDTO): Promise<UserDTO> {
+        try {
+            return await this.userService.login(createUserDTO);
+        } catch (error) {
+            throw new HttpException(
+                error.message || 'login error',
+                HttpStatus.BAD_REQUEST,
+            );
+        }
+    }
+
     @Put(':id')
     async updateUser(
         @Param('id') id: number,
@@ -64,4 +76,5 @@ export class UserController {
     async getChatList(@Param('id') id: number): Promise<any> {
         return this.userService.getSessionById(id);
     }
+    
 }
