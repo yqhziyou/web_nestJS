@@ -20,7 +20,7 @@ export class SessionService {
         private readonly openAIChatAssistant: OpenAIChatAssistant,
     ) {}
 
-    // 创建新的会话
+  
     async createSession(createSessionDTO: CreateSessionDTO): Promise<SessionDTO> {
         const session = this.sessionRepository.create({
             userId: createSessionDTO.userId,
@@ -33,7 +33,7 @@ export class SessionService {
         return plainToInstance(SessionDTO, savedSession, { excludeExtraneousValues: true });
     }
 
-    // 根据 sessionToken 获取会话信息
+  
     async getSessionByToken(sessionToken: string): Promise<SessionDTO> {
         console.log(sessionToken);
         const session = await this.sessionRepository.findOne({ where: { sessionToken } });
@@ -43,12 +43,12 @@ export class SessionService {
         return plainToInstance(SessionDTO, session, { excludeExtraneousValues: true });
     }
 
-    // 获取对话回复（包含上下文）
+
     async getChatResponse(sessionToken: string, content: string): Promise<string> {
-        // 获取会话信息
+       
         const session = await this.sessionRepository.findOne({
             where: { sessionToken },
-            relations: ['messages'], // 如果需要加载相关联的消息
+            relations: ['messages'], 
         });
         if (!session) {
             throw new NotFoundException('Session not found');
@@ -56,19 +56,19 @@ export class SessionService {
 
         const model = session.model;
 
-        // 获取历史消息
+     
         const historyMessages = await this.messageRepository.find({
             where: { session: { sessionToken } },
             order: { createdAt: 'ASC' },
         });
 
-        // 将历史消息映射为OpenAI需要的格式
+       
         const chatMessages = historyMessages.map((msg) => ({
             role: msg.role as 'user' | 'assistant' | 'system',
             content: msg.content,
         }));
 
-        // 保存当前用户消息
+       
         const userMessageEntity = this.messageRepository.create({
             session,
             role: 'user',
@@ -77,20 +77,20 @@ export class SessionService {
         });
         await this.messageRepository.save(userMessageEntity);
 
-        // 将本次用户消息加入上下文中
+    
         chatMessages.push({
             role: 'user',
             content: content,
         });
 
-        // 调用 OpenAIChatAssistant 获取带有上下文的回复
+  
         const messageDTO = await this.openAIChatAssistant.getChatCompletion(
-            session.id, // 传递 sessionId
+            session.id, 
             model,
             chatMessages,
         );
 
-        // 更新 totalTokenUsage
+        
         const updatedTokenUsage = session.totalTokenUsage + messageDTO.tokenUsage;
         await this.sessionRepository.update(
             { sessionToken },

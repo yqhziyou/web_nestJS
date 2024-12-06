@@ -15,7 +15,7 @@ export class OpenAIChatAssistant {
         private readonly messageRepository: Repository<Message>,
     ) {
         this.openai = new OpenAI({
-            apiKey: process.env.OPENAI_API_KEY, // 请确保已在环境变量中配置
+            apiKey: process.env.OPENAI_API_KEY, 
         });
     }
 
@@ -37,8 +37,7 @@ export class OpenAIChatAssistant {
                 tokenUsage: tokenUsage,
                 createdAt: new Date(),
             });
-
-            // 保存assistant消息到数据库
+            
             const messageEntity = this.messageRepository.create(messageDTO);
             await this.messageRepository.save(messageEntity);
 

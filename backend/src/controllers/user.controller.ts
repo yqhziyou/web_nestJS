@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { UserDTO, CreateUserDTO } from '../dto/user.dto';
-import {SessionDTO} from "../dto/session.dto";
 
 
 
