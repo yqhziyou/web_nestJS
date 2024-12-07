@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import Home from './pages/Home';
 import { UserProvider } from './context/UserContext';
-import UserProfile from "./components/UserInfo.tsx";
+import UserProfile from "./components/userInfo.tsx";
 
 
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUserInfo, updateUser } from '../api/user';
 import { useUser } from '../context/UserContext';
+import styles from './UserInfo.module.css';
 
 interface User {
     id: number;
@@ -12,9 +13,9 @@ interface User {
 }
 
 const UserProfile: React.FC = () => {
-    const { userid: paramUserId } = useParams<{ userid: string }>(); // 从路径参数获取 userId
+    const { userid: paramUserId } = useParams<{ userid: string }>(); 
     const context = useUser();
-    const effectiveUserId = Number(paramUserId) || context.userid; // 优先使用路径参数中的 userId
+    const effectiveUserId = Number(paramUserId) || context.userid; 
     const [user, setUser] = useState<User | null>(null);
     const [editMode, setEditMode] = useState(false);
     const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ const UserProfile: React.FC = () => {
                 setFormData({
                     username: response.username,
                     email: response.email,
-                    password: '' // Password is not returned for security reasons
+                    password: '' 
                 });
             } catch (err) {
                 setError('Failed to fetch user information');
@@ -80,41 +81,44 @@ const UserProfile: React.FC = () => {
     if (error) return <p>{error}</p>;
 
     return (
-        <div>
+        <div id="user-profile-container" className={styles['user-profile-container']}>
             <h1>User Profile</h1>
             {user ? (
                 <div>
                     {editMode ? (
                         <div>
-                            <label>
+                            <label className={styles.label}>
                                 Username:
                                 <input
                                     type="text"
                                     name="username"
                                     value={formData.username}
                                     onChange={handleInputChange}
+                                    className={styles.input}
                                 />
                             </label>
-                            <label>
+                            <label className={styles.label}>
                                 Email:
                                 <input
                                     type="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleInputChange}
+                                    className={styles.input}
                                 />
                             </label>
-                            <label>
+                            <label className={styles.label}>
                                 Password:
                                 <input
                                     type="password"
                                     name="password"
                                     value={formData.password}
                                     onChange={handleInputChange}
+                                    className={styles.input}
                                 />
                             </label>
-                            <button onClick={handleUpdateUser}>Save</button>
-                            <button onClick={() => setEditMode(false)}>Cancel</button>
+                            <button className={styles.button} onClick={handleUpdateUser}>Save</button>
+                            <button className={styles.button} onClick={() => setEditMode(false)}>Cancel</button>
                         </div>
                     ) : (
                         <div>
@@ -122,7 +126,7 @@ const UserProfile: React.FC = () => {
                             <p><strong>Email:</strong> {user.email}</p>
                             <p><strong>Created At:</strong> {new Date(user.createdAt).toLocaleString()}</p>
                             <p><strong>Updated At:</strong> {new Date(user.updatedAt).toLocaleString()}</p>
-                            <button onClick={() => setEditMode(true)}>Update</button>
+                            <button className={styles.button} onClick={() => setEditMode(true)}>Update</button>
                         </div>
                     )}
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ChatList from '../components/ChatList';
 import ChatWindow from '../components/ChatWindow';
-import {Link, useLocation} from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Home.css';
 import { useUser } from '../context/UserContext';
 
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
             setUserid(locationUserid);
         }
     }, [locationUserid, userid, setUserid]);
-    
+
     if (!userid) {
         return <p>Error: User ID is missing. Please log in again.</p>;
     }
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
                             to={{
                                 pathname: "/profile",
                             }}
-                            state={{userid}}
+                            state={{ userid }}
                         >
                             Account
                         </Link>
@@ -49,14 +49,17 @@ const Home: React.FC = () => {
 
             {/* Main Content Section */}
             <div className="main-content">
-                <ChatList userId={userid} setSessionToken={setSessionToken}/>
-                {sessionToken ? (
-                    <ChatWindow sessionToken={sessionToken}/>
-                ) : (
-                    <div>Please select a session to start chatting.</div>
-                )}
+                <div className="chat-list">
+                    <ChatList userId={userid} setSessionToken={setSessionToken} />
+                </div>
+                <div className="chat-window">
+                    {sessionToken ? (
+                        <ChatWindow sessionToken={sessionToken} />
+                    ) : (
+                        <div>Please select a session to start chatting.</div>
+                    )}
+                </div>
             </div>
-            
         </div>
     );
 };
