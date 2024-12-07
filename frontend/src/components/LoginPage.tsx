@@ -20,9 +20,7 @@ const LoginComponent: React.FC = () => {
         try {
             const response = await login(LoginDTO);
             setUserid(response.id);
-            alert('Login successful! Redirecting to the HomePage...');
             console.log('Login successful:', response);
-           
             navigate('/home', { state: { userid: response.id } });
         } catch (error) {
             console.error('Login failed:', error);
