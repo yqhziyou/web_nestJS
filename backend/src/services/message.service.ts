@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Message } from '../entities/message';
+import { Message } from '../entities/Message';
 import { MessageDTO } from '../dto/message.dto';
 import { plainToInstance } from 'class-transformer';
 import OpenAI from "openai";
