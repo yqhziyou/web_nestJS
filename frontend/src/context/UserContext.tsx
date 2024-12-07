@@ -2,14 +2,14 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface UserContextType {
-    userid: string | null;
-    setUserid: (userid: string) => void;
+    userid: number | null;
+    setUserid: (userid: number) => void; // 将 string 改为 number
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [userid, setUserid] = useState<string | null>(null);
+    const [userid, setUserid] = useState<number | null>(null);
     return (
         <UserContext.Provider value={{ userid, setUserid }}>
             {children}
@@ -24,3 +24,4 @@ export const useUser = () => {
     }
     return context;
 };
+

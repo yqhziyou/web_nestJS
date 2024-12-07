@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // For navigation
 import { login, createUser } from '../api/user';
 import './LoginComponent.css';
+import { useUser } from '../context/UserContext';
 
 const LoginComponent: React.FC = () => {
     const [username, setUsername] = useState<string>('');
@@ -9,6 +10,7 @@ const LoginComponent: React.FC = () => {
     const [password, setPassword] = useState<string>('');
     const [confirmPassword, setConfirmPassword] = useState<string>('');
     const [isRegistering, setIsRegistering] = useState<boolean>(false);
+    const { setUserid } = useUser();
 
     const navigate = useNavigate(); // Initialize navigate
 
@@ -17,11 +19,11 @@ const LoginComponent: React.FC = () => {
         const LoginDTO = { username, password };
         try {
             const response = await login(LoginDTO);
-            const userid = response.id; 
+            setUserid(response.id);
             alert('Login successful! Redirecting to the HomePage...');
             console.log('Login successful:', response);
            
-            navigate('/home', { state: { userid } });
+            navigate('/home', { state: { userid: response.id } });
         } catch (error) {
             console.error('Login failed:', error);
             alert('Login failed. Please check your credentials and try again.');

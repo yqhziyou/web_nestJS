@@ -1,5 +1,5 @@
 import {Exclude, Expose, Type} from 'class-transformer';
-import {IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength} from 'class-validator';
+import {IsEmail, IsNotEmpty, IsOptional, IsString, Matches, MaxLength, MinLength} from 'class-validator';
 
 
 @Exclude()
@@ -37,5 +37,6 @@ export class CreateUserDTO {
 
     @IsNotEmpty()
     @IsString()
+    @Matches(/^\S*$/, { message: 'Password must not contain spaces' })
     password: string;
 }

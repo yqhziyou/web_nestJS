@@ -1,15 +1,37 @@
-.home-container {
+.banner {
+    text-align: center;
+    background-color: #f5f5f5;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar {
     display: flex;
-    height: 100vh; /* 设置全屏高度 */
+    justify-content: center;
+    background-color: #333;
+    padding: 10px 0;
 }
 
-.home-container > div:first-child {
-    flex: 0 0 20%; /* 固定宽度为20% */
-    border-right: 1px solid #ccc; /* 添加分隔线，可选 */
-    overflow-y: auto; /* 如果内容过多，允许滚动 */
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
-.home-container > div:last-child {
-    flex: 1; /* 占据剩余80%的宽度 */
-    overflow-y: auto; /* 如果内容过多，允许滚动 */
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+.main-content {
+    display: flex;
+    margin: 20px;
 }
