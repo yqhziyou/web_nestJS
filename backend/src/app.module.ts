@@ -25,7 +25,7 @@ console.log('DB_HOST:', process.env.DB_HOST);
       database: process.env.DB_DATABASE,
       schema: process.env.DB_SCHEMA,
       autoLoadEntities: true,
-      synchronize: true,
+      //synchronize: true,
       logging: true,
     }),
     TypeOrmModule.forFeature([Message, Session, User]),
