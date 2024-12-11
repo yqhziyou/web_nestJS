@@ -1,7 +1,7 @@
 // session.ts
 import axios from 'axios';
 
-const baseURL = 'http://localhost:3000';
+const baseURL = 'https://portable-ai.xyz';
 
 
 export const createSession = async (CreateSessionDTO: object) => {
